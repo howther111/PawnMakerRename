@@ -902,12 +902,12 @@ class CharacterData():
         jsontext["data"]["invisible"] = "false"
         jsontext["data"]["hideStatus"] = "false"
         jsontext["data"]["externalUrl"] = self.url
-        command = "//能力値判定\n2d6+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
-                  "2d6+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
-                  "2d6+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
-                  "2d6+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
-                  "2d6+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
-                  "2d6+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
+        command = "//能力値判定\nAL+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
+                  "AL+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
+                  "AL+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
+                  "AL+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
+                  "AL+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
+                  "AL+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
 
         if "<chatpalette_linkage_start>\n" in self.base_memo:
             after_start = self.base_memo.split("<chatpalette_linkage_start>\n")[1]

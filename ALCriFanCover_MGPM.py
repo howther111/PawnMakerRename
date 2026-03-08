@@ -352,10 +352,10 @@ class GuardianData():
         #    text = text + item + "/"
         #text = text[:-1]
 
-        if "<pawntext_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<pawntext_guardian_start>\n")[1]
-            before_end = after_start.split("\n<pawntext_guardian_end>")[0]
-            if "<no_default_guardian_pawntext>" in self.base_memo:
+        if "<pawntext_guardian_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<pawntext_guardian_start_cover>\n")[1]
+            before_end = after_start.split("\n<pawntext_guardian_end_cover>")[0]
+            if "<no_default_guardian_pawntext_cover>" in self.base_memo:
                 text = before_end
             else:
                 text = text + "\n\n" + before_end
@@ -614,11 +614,11 @@ class GuardianData():
                                        "C({FP}-YY)　残りFP\n" + \
                                        "C({HP}-YY)　残りHP\n" + \
                                        "C({EN}-YY)　残りEN\n\n" + \
-                                       "//防御、+0欄に修正を記入\nAL+{回避値}+0[{クリティカル値},{ファンブル値}]　近・回避\n" + \
-                                       "AL+{防壁値}+0[{クリティカル値},{ファンブル値}]　遠・防壁\n" + \
+                                       "//防御、+0欄に修正を記入\nMG+{回避値}+0[{クリティカル値},{ファンブル値}]　近・回避\n" + \
+                                       "MG+{防壁値}+0[{クリティカル値},{ファンブル値}]　遠・防壁\n" + \
                                        "C(XX-{}-0)　被ダメージ、{}内に防御属性3文字\n\n" + \
-                                       "//攻撃、+0欄に修正を記入\nAL+{命中値}+0[{クリティカル値},{ファンブル値}]　近・命中\n" + \
-                                       "AL+{砲撃値}+0[{クリティカル値},{ファンブル値}]　遠・砲撃\n" + \
+                                       "//攻撃、+0欄に修正を記入\nMG+{命中値}+0[{クリティカル値},{ファンブル値}]　近・命中\n" + \
+                                       "MG+{砲撃値}+0[{クリティカル値},{ファンブル値}]　遠・砲撃\n" + \
                                        "2d6+" + outfits_main_weapon_shortattack_array[1] + "+0　" + \
                                        "〈" + outfits_main_weapon_shortattack_array[0] + "〉" + \
                                        self.outfits_main_weapon_shortname + "ダメージ\n" \
@@ -631,12 +631,12 @@ class GuardianData():
                                        "2d6+" + outfits_sub_weapon_longattack_array[1] + "+0　" + \
                                        "〈" + outfits_sub_weapon_longattack_array[0] + "〉" + \
                                        self.outfits_sub_weapon_longname + "ダメージ\n" + \
-                                       "\n//能力値判定\nAL+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
-                                       "AL+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
-                                       "AL+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
-                                       "AL+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
-                                       "AL+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
-                                       "AL+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
+                                       "\n//能力値判定\nMG+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
+                                       "MG+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
+                                       "MG+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
+                                       "MG+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
+                                       "MG+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
+                                       "MG+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
         command = command + "\n\n//特技"
         for i in range(len(self.skill_memo)):
             if not self.skill_name[i] == "":
@@ -658,19 +658,19 @@ class GuardianData():
                 command = command + "\nアイテム名:" + itemstr[0].replace("\n", "") + "/効果:" + self.items_effect[
                     i].replace("\n", "")
 
-        if "<chatpalette_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<chatpalette_guardian_start>\n")[1]
-            before_end = after_start.split("\n<chatpalette_guardian_end>")[0]
-            if "<no_default_chatpalette_guardian>" in self.base_memo:
+        if "<chatpalette_guardian_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<chatpalette_guardian_start_cover>\n")[1]
+            before_end = after_start.split("\n<chatpalette_guardian_end_cover>")[0]
+            if "<no_default_chatpalette_guardian_cover>" in self.base_memo:
                 command = before_end
             else:
                 command = command + "\n\n" + before_end
 
         i = status_i
-        if "<status_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<status_guardian_start>\n")[1]
-            before_end = after_start.split("\n<status_guardian_end>")[0]
-            splitted_list = before_end.split("\n<status_guardian_splitter>\n")
+        if "<status_guardian_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<status_guardian_start_cover>\n")[1]
+            before_end = after_start.split("\n<status_guardian_end_cover>")[0]
+            splitted_list = before_end.split("\n<status_guardian_splitter_cover>\n")
             for splitted in splitted_list:
                 label, value, max = splitted.split(",")
                 jsontext["data"]["status"].append({})
@@ -679,10 +679,10 @@ class GuardianData():
                 jsontext["data"]["status"][i]["max"] = int(max)
                 i = i + 1
 
-        if "<params_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<params_guardian_start>\n")[1]
-            before_end = after_start.split("\n<params_guardian_end>")[0]
-            splitted_list = before_end.split("\n<params_guardian_splitter>\n")
+        if "<params_guardian_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<params_guardian_start_cover>\n")[1]
+            before_end = after_start.split("\n<params_guardian_end_cover>")[0]
+            splitted_list = before_end.split("\n<params_guardian_splitter_cover>\n")
             for splitted in splitted_list:
                 label, value = splitted.split(",")
                 jsontext["data"]["params"].append({})
@@ -788,10 +788,10 @@ class CharacterData():
 
         text = text + "\n財産ポイント:" + self.add_fortune_point
 
-        if "<pawntext_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<pawntext_linkage_start>\n")[1]
-            before_end = after_start.split("\n<pawntext_linkage_end>")[0]
-            if "<no_default_linkage_pawntext>" in self.base_memo:
+        if "<pawntext_linkage_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<pawntext_linkage_start_cover>\n")[1]
+            before_end = after_start.split("\n<pawntext_linkage_end_cover>")[0]
+            if "<no_default_linkage_pawntext_cover>" in self.base_memo:
                 text = before_end
             else:
                 text = text + "\n\n" + before_end
@@ -903,26 +903,26 @@ class CharacterData():
         jsontext["data"]["invisible"] = "false"
         jsontext["data"]["hideStatus"] = "false"
         jsontext["data"]["externalUrl"] = self.url
-        command = "//能力値判定\n2d6+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
-                  "2d6+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
-                  "2d6+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
-                  "2d6+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
-                  "2d6+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
-                  "2d6+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
+        command = "//能力値判定\nMG+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
+                  "MG+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
+                  "MG+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
+                  "MG+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
+                  "MG+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
+                  "MG+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
 
-        if "<chatpalette_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<chatpalette_linkage_start>\n")[1]
-            before_end = after_start.split("\n<chatpalette_linkage_end>")[0]
-            if "<no_default_chatpalette_linkage>" in self.base_memo:
+        if "<chatpalette_linkage_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<chatpalette_linkage_start_cover>\n")[1]
+            before_end = after_start.split("\n<chatpalette_linkage_end_cover>")[0]
+            if "<no_default_chatpalette_linkage_cover>" in self.base_memo:
                 command = before_end
             else:
                 command = command + "\n\n" + before_end
 
         i = status_i
-        if "<status_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<status_linkage_start>\n")[1]
-            before_end = after_start.split("\n<status_linkage_end>")[0]
-            splitted_list = before_end.split("\n<status_linkage_splitter>\n")
+        if "<status_linkage_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<status_linkage_start_cover>\n")[1]
+            before_end = after_start.split("\n<status_linkage_end_cover>")[0]
+            splitted_list = before_end.split("\n<status_linkage_splitter_cover>\n")
             for splitted in splitted_list:
                 label, value, max = splitted.split(",")
                 jsontext["data"]["status"].append({})
@@ -931,10 +931,10 @@ class CharacterData():
                 jsontext["data"]["status"][i]["max"] = max
                 i = i + 1
 
-        if "<params_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<params_linkage_start>\n")[1]
-            before_end = after_start.split("\n<params_linkage_end>")[0]
-            splitted_list = before_end.split("\n<params_linkage_splitter>\n")
+        if "<params_linkage_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<params_linkage_start_cover>\n")[1]
+            before_end = after_start.split("\n<params_linkage_end_cover>")[0]
+            splitted_list = before_end.split("\n<params_linkage_splitter_cover>\n")
             for splitted in splitted_list:
                 label, value = splitted.split(",")
                 jsontext["data"]["params"].append({})
