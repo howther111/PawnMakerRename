@@ -363,10 +363,10 @@ class GuardianData():
         #    text = text + item + "/"
         #text = text[:-1]
 
-        if "<pawntext_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<pawntext_start>\n")[1]
-            before_end = after_start.split("\n<pawntext_end>")[0]
-            if "<no_default_pawntext>" in self.base_memo:
+        if "<pawntext_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<pawntext_start_cover>\n")[1]
+            before_end = after_start.split("\n<pawntext_end_cover>")[0]
+            if "<no_default_pawntext_cover>" in self.base_memo:
                 text = before_end
             else:
                 text = text + "\n\n" + before_end
@@ -683,19 +683,19 @@ class GuardianData():
                 command = command + "\nアイテム名:" + itemstr[0].replace("\n", "") + "/効果:" + self.items_effect[
                     i].replace("\n", "")
 
-        if "<chatpalette_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<chatpalette_start>\n")[1]
-            before_end = after_start.split("\n<chatpalette_end>")[0]
-            if "<no_default_chatpalette>" in self.base_memo:
+        if "<chatpalette_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<chatpalette_start_cover>\n")[1]
+            before_end = after_start.split("\n<chatpalette_end_cover>")[0]
+            if "<no_default_chatpalette_cover>" in self.base_memo:
                 command = before_end
             else:
                 command = command + "\n\n" + before_end
 
         i = status_i
-        if "<status_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<status_start>\n")[1]
-            before_end = after_start.split("\n<status_end>")[0]
-            splitted_list = before_end.split("\n<status_splitter>\n")
+        if "<status_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<status_start_cover>\n")[1]
+            before_end = after_start.split("\n<status_end_cover>")[0]
+            splitted_list = before_end.split("\n<status_splitter_cover>\n")
             for splitted in splitted_list:
                 label, value, max = splitted.split(",")
                 jsontext["data"]["status"].append({})
@@ -704,10 +704,10 @@ class GuardianData():
                 jsontext["data"]["status"][i]["max"] = int(max)
                 i = i + 1
 
-        if "<params_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<params_start>\n")[1]
-            before_end = after_start.split("\n<params_end>")[0]
-            splitted_list = before_end.split("\n<params_splitter>\n")
+        if "<params_start_cover>\n" in self.base_memo:
+            after_start = self.base_memo.split("<params_start_cover>\n")[1]
+            before_end = after_start.split("\n<params_end_cover>")[0]
+            splitted_list = before_end.split("\n<params_splitter_cover>\n")
             for splitted in splitted_list:
                 label, value = splitted.split(",")
                 jsontext["data"]["params"].append({})
