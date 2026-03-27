@@ -387,12 +387,12 @@ class HeroData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][j]["label"] = "反射基本値"
-        jsontext["data"]["params"][j]["value"] = self.sense_total
+        jsontext["data"]["params"][j]["value"] = self.reflex_total
         j = j + 1
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][j]["label"] = "知覚基本値"
-        jsontext["data"]["params"][j]["value"] = self.strong_total
+        jsontext["data"]["params"][j]["value"] = self.sense_total
         j = j + 1
 
         jsontext["data"]["params"].append({})
@@ -417,12 +417,12 @@ class HeroData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][j]["label"] = "反射B"
-        jsontext["data"]["params"][j]["value"] = self.sense_bonus
+        jsontext["data"]["params"][j]["value"] = self.reflex_bonus
         j = j + 1
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][j]["label"] = "知覚B"
-        jsontext["data"]["params"][j]["value"] = self.strong_bonus
+        jsontext["data"]["params"][j]["value"] = self.sense_bonus
         j = j + 1
 
         jsontext["data"]["params"].append({})

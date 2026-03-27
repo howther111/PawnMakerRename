@@ -12,7 +12,6 @@ import json
 
 
 class GuardianData():
-    base_memo = ""
     character_name = ""
     guardian_name = ""
     level = 0
@@ -93,7 +92,6 @@ class GuardianData():
 
     def input_data(self, driver, input_url):
         self.url = input_url
-        self.base_memo = driver.find_element(by=By.ID, value="base.memo").get_attribute("value")
         self.character_name = driver.find_element(by=By.ID, value="base.name").get_attribute("value")
         self.guardian_name = driver.find_element(by=By.ID, value="base.guardian.name").get_attribute("value")
         self.level = driver.find_element(by=By.ID, value="base.level").get_attribute("value")
@@ -303,72 +301,20 @@ class GuardianData():
 
         text = text + "\n財産ポイント:" + self.add_fortune_point
 
-        text = text + "\n【命中】" + str(self.outfits_total_hit) + \
-                   "【回避】" + str(self.outfits_total_dodge) + \
-                   "【砲撃】" + str(self.outfits_total_magic) + \
-                   "【防壁】" + str(self.outfits_total_countermagic) + \
-                   "【行動】" + str(self.outfits_total_action) + \
-                   "\n【力場】" + str(self.outfits_total_fp) + \
-                   "【耐久】" + str(self.outfits_total_hp) + \
-                   "【感応】" + str(self.outfits_total_mp) + \
-                   "【移動力】" + str(self.outfits_total_battlespeed_total)
-
         text = text + "\n加護:"
         for special in self.specials:
             text = text + special + "/"
         text = text[:-1]
 
-        text = text + "\n[*]主近:" + self.outfits_main_weapon_shortname + \
-                " 射程:" + self.outfits_main_weapon_shortrange + \
-                " 代償:" + self.outfits_main_weapon_shortstrong + \
-                "\n攻撃力:" + self.outfits_main_weapon_shortattack
-
-        text = text + "\n[*]副近:" + self.outfits_sub_weapon_shortname + \
-                " 射程:" + self.outfits_sub_weapon_shortrange + \
-                " 代償:" + self.outfits_sub_weapon_shortstrong + \
-                "\n攻撃力:" + self.outfits_sub_weapon_shortattack
-
-        text = text + "\n[*]主遠:" + self.outfits_main_weapon_longname + \
-                   " 射程:" + self.outfits_main_weapon_longrange + \
-                   " 代償:" + self.outfits_main_weapon_longstrong + \
-                   "\n攻撃力:" + self.outfits_main_weapon_longattack
-
-        text = text + "\n[*]副遠:" + self.outfits_sub_weapon_longname + \
-                   " 射程:" + self.outfits_sub_weapon_longrange + \
-                   " 代償:" + self.outfits_sub_weapon_longstrong + \
-                   "\n攻撃力:" + self.outfits_sub_weapon_longattack
-
-        text = text + "\n防御力:斬" + self.armourstotal_slash + \
-                "/刺" + self.armourstotal_pierce + \
-                "/殴" + self.armourstotal_crash + \
-                "/炎" + self.armourstotal_fire + \
-                "/氷" + self.armourstotal_ice + \
-                "/雷" + self.armourstotal_thunder + \
-                "/光" + self.armourstotal_light + \
-                "/闇" + self.armourstotal_dark
-
-        #text = text + "\nアイテム:"
-        #for item in self.items:
-        #    text = text + item + "/"
-        #text = text[:-1]
-
-        if "<pawntext_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<pawntext_guardian_start>\n")[1]
-            before_end = after_start.split("\n<pawntext_guardian_end>")[0]
-            if "<no_default_guardian_pawntext>" in self.base_memo:
-                text = before_end
-            else:
-                text = text + "\n\n" + before_end
-
         print(text)
 
-        file_name = self.guardian_name.replace("/", "_").replace("\"", "”") + "_ガーディアンテキストデータ.txt"
+        file_name = self.guardian_name.replace("/", "_").replace("\"", "”") + "_ガーディアンコアテキストデータ.txt"
 
         f = open(file_name, 'w', encoding="utf-8")
         f.write(text)
         f.close()
 
-        print("ガーディアンテキストデータを生成しました")
+        print("ガーディアンコアテキストデータを生成しました")
         self.output_pawn(text)
 
     def output_pawn(self, text_data):
@@ -435,33 +381,33 @@ class GuardianData():
         if "/" in self.outfits_main_weapon_shortstrong:
             mws_ammo = self.outfits_main_weapon_shortstrong.split("/")
             jsontext["data"]["status"].append({})
-            jsontext["data"]["status"][i]["label"] = self.outfits_main_weapon_shortname + "弾数"
-            jsontext["data"]["status"][i]["value"] = mws_ammo[1]
-            jsontext["data"]["status"][i]["max"] = mws_ammo[1]
+            jsontext["data"]["status"][i]["label"] = "主近弾数"
+            jsontext["data"]["status"][i]["value"] = "0"
+            jsontext["data"]["status"][i]["max"] = "10"
             i = i + 1
 
         if "/" in self.outfits_sub_weapon_shortstrong:
             sws_ammo = self.outfits_sub_weapon_shortstrong.split("/")
             jsontext["data"]["status"].append({})
-            jsontext["data"]["status"][i]["label"] = self.outfits_sub_weapon_shortname + "弾数"
-            jsontext["data"]["status"][i]["value"] = sws_ammo[1]
-            jsontext["data"]["status"][i]["max"] = sws_ammo[1]
+            jsontext["data"]["status"][i]["label"] = "副近弾数"
+            jsontext["data"]["status"][i]["value"] = "0"
+            jsontext["data"]["status"][i]["max"] = "10"
             i = i + 1
 
         if "/" in self.outfits_main_weapon_longstrong:
             mwl_ammo = self.outfits_main_weapon_longstrong.split("/")
             jsontext["data"]["status"].append({})
-            jsontext["data"]["status"][i]["label"] = self.outfits_main_weapon_longname + "弾数"
-            jsontext["data"]["status"][i]["value"] = mwl_ammo[1]
-            jsontext["data"]["status"][i]["max"] = mwl_ammo[1]
+            jsontext["data"]["status"][i]["label"] = "主遠弾数"
+            jsontext["data"]["status"][i]["value"] = "0"
+            jsontext["data"]["status"][i]["max"] = "10"
             i = i + 1
 
         if "/" in self.outfits_sub_weapon_longstrong:
             swl_ammo = self.outfits_sub_weapon_longstrong.split("/")
             jsontext["data"]["status"].append({})
-            jsontext["data"]["status"][i]["label"] = self.outfits_sub_weapon_longname + "弾数"
-            jsontext["data"]["status"][i]["value"] = swl_ammo[1]
-            jsontext["data"]["status"][i]["max"] = swl_ammo[1]
+            jsontext["data"]["status"][i]["label"] = "副遠弾数"
+            jsontext["data"]["status"][i]["value"] = "0"
+            jsontext["data"]["status"][i]["max"] = "10"
             i = i + 1
 
         jsontext["data"]["status"].append({})
@@ -479,111 +425,7 @@ class GuardianData():
 
         jsontext["data"]["params"] = []
 
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][0]["label"] = "体力基本値"
-        jsontext["data"]["params"][0]["value"] = self.strong_total
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][1]["label"] = "反射基本値"
-        jsontext["data"]["params"][1]["value"] = self.reflex_total
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][2]["label"] = "知覚基本値"
-        jsontext["data"]["params"][2]["value"] = self.sense_total
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][3]["label"] = "理知基本値"
-        jsontext["data"]["params"][3]["value"] = self.intellect_total
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][4]["label"] = "意志基本値"
-        jsontext["data"]["params"][4]["value"] = self.will_total
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][5]["label"] = "幸運基本値"
-        jsontext["data"]["params"][5]["value"] = self.bllesing_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][6]["label"] = "体力B"
-        jsontext["data"]["params"][6]["value"] = self.strong_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][7]["label"] = "反射B"
-        jsontext["data"]["params"][7]["value"] = self.reflex_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][8]["label"] = "知覚B"
-        jsontext["data"]["params"][8]["value"] = self.sense_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][9]["label"] = "理知B"
-        jsontext["data"]["params"][9]["value"] = self.intellect_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][10]["label"] = "意志B"
-        jsontext["data"]["params"][10]["value"] = self.will_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][11]["label"] = "幸運B"
-        jsontext["data"]["params"][11]["value"] = self.bllesing_bonus
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][12]["label"] = "命中値"
-        jsontext["data"]["params"][12]["value"] = self.outfits_total_hit
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][13]["label"] = "回避値"
-        jsontext["data"]["params"][13]["value"] = self.outfits_total_dodge
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][14]["label"] = "砲撃値"
-        jsontext["data"]["params"][14]["value"] = self.outfits_total_magic
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][15]["label"] = "防壁値"
-        jsontext["data"]["params"][15]["value"] = self.outfits_total_countermagic
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][16]["label"] = "行動値"
-        jsontext["data"]["params"][16]["value"] = self.outfits_total_action
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][17]["label"] = "移動力"
-        jsontext["data"]["params"][17]["value"] = self.outfits_total_battlespeed_total
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][18]["label"] = "斬防御"
-        jsontext["data"]["params"][18]["value"] = self.armourstotal_slash
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][19]["label"] = "刺防御"
-        jsontext["data"]["params"][19]["value"] = self.armourstotal_pierce
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][20]["label"] = "殴防御"
-        jsontext["data"]["params"][20]["value"] = self.armourstotal_crash
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][21]["label"] = "炎防御"
-        jsontext["data"]["params"][21]["value"] = self.armourstotal_fire
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][22]["label"] = "氷防御"
-        jsontext["data"]["params"][22]["value"] = self.armourstotal_ice
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][23]["label"] = "雷防御"
-        jsontext["data"]["params"][23]["value"] = self.armourstotal_thunder
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][24]["label"] = "光防御"
-        jsontext["data"]["params"][24]["value"] = self.armourstotal_light
-
-        jsontext["data"]["params"].append({})
-        jsontext["data"]["params"][25]["label"] = "闇防御"
-        jsontext["data"]["params"][25]["value"] = self.armourstotal_dark
-
-        j = 26
+        j = 0
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][j]["label"] = "キャラクターレベル"
         jsontext["data"]["params"][j]["value"] = self.level
@@ -612,30 +454,7 @@ class GuardianData():
         command = "//アクション\nムーブ:\nマイナー:\nメジャー:\n\n//リソース\n" + \
                                        "C({FP}-YY)　残りFP\n" + \
                                        "C({HP}-YY)　残りHP\n" + \
-                                       "C({EN}-YY)　残りEN\n\n" + \
-                                       "//防御、+0欄に修正を記入\nAL+{回避値}+0　近・回避\n" + \
-                                       "AL+{防壁値}+0　遠・防壁\n" + \
-                                       "C(XX-{}-0)　被ダメージ、{}内に防御属性3文字\n\n" + \
-                                       "//攻撃、+0欄に修正を記入\nAL+{命中値}+0　近・命中\n" + \
-                                       "AL+{砲撃値}+0　遠・砲撃\n" + \
-                                       "2d6+" + outfits_main_weapon_shortattack_array[1] + "+0　" + \
-                                       "〈" + outfits_main_weapon_shortattack_array[0] + "〉" + \
-                                       self.outfits_main_weapon_shortname + "ダメージ\n" \
-                                       "2d6+" + outfits_sub_weapon_shortattack_array[1] + "+0　" + \
-                                       "〈" + outfits_sub_weapon_shortattack_array[0] + "〉" + \
-                                       self.outfits_sub_weapon_shortname + "ダメージ\n" \
-                                       "2d6+" + outfits_main_weapon_longattack_array[1] + "+0　" + \
-                                       "〈" + outfits_main_weapon_longattack_array[0] + "〉" + \
-                                       self.outfits_main_weapon_longname + "ダメージ\n" \
-                                       "2d6+" + outfits_sub_weapon_longattack_array[1] + "+0　" + \
-                                       "〈" + outfits_sub_weapon_longattack_array[0] + "〉" + \
-                                       self.outfits_sub_weapon_longname + "ダメージ\n" + \
-                                       "\n//能力値判定\nAL+{体力B}+0　体力判定\n" + \
-                                       "AL+{反射B}+0　反射判定\n" + \
-                                       "AL+{知覚B}+0　知覚判定\n" + \
-                                       "AL+{理知B}+0　理知判定\n" + \
-                                       "AL+{意志B}+0　意志判定\n" + \
-                                       "AL+{幸運B}+0　幸運判定"
+                                       "C({EN}-YY)　残りEN"
         command = command + "\n\n//特技"
         for i in range(len(self.skill_memo)):
             if not self.skill_name[i] == "":
@@ -657,19 +476,19 @@ class GuardianData():
                 command = command + "\nアイテム名:" + itemstr[0].replace("\n", "") + "/効果:" + self.items_effect[
                     i].replace("\n", "")
 
-        if "<chatpalette_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<chatpalette_guardian_start>\n")[1]
-            before_end = after_start.split("\n<chatpalette_guardian_end>")[0]
-            if "<no_default_chatpalette_guardian>" in self.base_memo:
+        if "<chatpalette_guardian_start_core>\n" in self.base_memo:
+            after_start = self.base_memo.split("<chatpalette_guardian_start_core>\n")[1]
+            before_end = after_start.split("\n<chatpalette_guardian_end_core>")[0]
+            if "<no_default_chatpalette_guardian_core>" in self.base_memo:
                 command = before_end
             else:
                 command = command + "\n\n" + before_end
 
         i = status_i
-        if "<status_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<status_guardian_start>\n")[1]
-            before_end = after_start.split("\n<status_guardian_end>")[0]
-            splitted_list = before_end.split("\n<status_guardian_splitter>\n")
+        if "<status_guardian_start_core>\n" in self.base_memo:
+            after_start = self.base_memo.split("<status_guardian_start_core>\n")[1]
+            before_end = after_start.split("\n<status_guardian_end_core>")[0]
+            splitted_list = before_end.split("\n<status_guardian_splitter_core>\n")
             for splitted in splitted_list:
                 label, value, max = splitted.split(",")
                 jsontext["data"]["status"].append({})
@@ -678,10 +497,10 @@ class GuardianData():
                 jsontext["data"]["status"][i]["max"] = int(max)
                 i = i + 1
 
-        if "<params_guardian_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<params_guardian_start>\n")[1]
-            before_end = after_start.split("\n<params_guardian_end>")[0]
-            splitted_list = before_end.split("\n<params_guardian_splitter>\n")
+        if "<params_guardian_start_core>\n" in self.base_memo:
+            after_start = self.base_memo.split("<params_guardian_start_core>\n")[1]
+            before_end = after_start.split("\n<params_guardian_end_core>")[0]
+            splitted_list = before_end.split("\n<params_guardian_splitter_core>\n")
             for splitted in splitted_list:
                 label, value = splitted.split(",")
                 jsontext["data"]["params"].append({})
@@ -691,16 +510,15 @@ class GuardianData():
 
         jsontext["data"]["commands"] = command
         jsontext["data"]["externalUrl"] = self.url
-        file_name = self.guardian_name.replace("/", "_").replace("\"", "”") + "_ガーディアン駒データ.txt"
+        file_name = self.guardian_name.replace("/", "_").replace("\"", "”") + "_ガーディアンコア駒データ.txt"
 
         with open(file_name, 'w', encoding="utf-8") as file:  # 第二引数：writableオプションを指定
             json.dump(jsontext, file, ensure_ascii=False)
 
-        print("ガーディアン駒データを生成しました")
+        print("ガーディアンコア駒データを生成しました")
 
 
 class CharacterData():
-    base_memo = ""
     url = ""
     character_name = ""
     player_name = ""
@@ -730,7 +548,6 @@ class CharacterData():
 
     def input_data(self, driver, input_url):
         self.url = input_url
-        self.base_memo = driver.find_element(by=By.ID, value="base.memo").get_attribute("value")
         self.character_name = driver.find_element(by=By.ID, value="base.name").get_attribute("value")
         self.player_name = driver.find_element(by=By.ID, value="base.player").get_attribute("value")
         self.strong_total = driver.find_element(by=By.ID, value="abl.strong.total").get_attribute("value")
@@ -786,14 +603,6 @@ class CharacterData():
         text = text[:-1]
 
         text = text + "\n財産ポイント:" + self.add_fortune_point
-
-        if "<pawntext_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<pawntext_linkage_start>\n")[1]
-            before_end = after_start.split("\n<pawntext_linkage_end>")[0]
-            if "<no_default_linkage_pawntext>" in self.base_memo:
-                text = before_end
-            else:
-                text = text + "\n\n" + before_end
 
         print(text)
 
@@ -878,11 +687,11 @@ class CharacterData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][7]["label"] = "反射B"
-        jsontext["data"]["params"][7]["value"] = self.sense_bonus
+        jsontext["data"]["params"][7]["value"] = self.reflex_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][8]["label"] = "知覚B"
-        jsontext["data"]["params"][8]["value"] = self.strong_bonus
+        jsontext["data"]["params"][8]["value"] = self.sense_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][9]["label"] = "理知B"
@@ -902,26 +711,27 @@ class CharacterData():
         jsontext["data"]["invisible"] = "false"
         jsontext["data"]["hideStatus"] = "false"
         jsontext["data"]["externalUrl"] = self.url
-        command = "//能力値判定\n2d6+{体力B}+0　体力判定\n" + \
-                  "2d6+{反射B}+0　反射判定\n" + \
-                  "2d6+{知覚B}+0　知覚判定\n" + \
-                  "2d6+{理知B}+0　理知判定\n" + \
-                  "2d6+{意志B}+0　意志判定\n" + \
-                  "2d6+{幸運B}+0　幸運判定"
+        i = status_i
+        command = "//能力値判定\nAL+{体力B}+0　体力判定\n" + \
+                                       "AL+{反射B}+0　反射判定\n" + \
+                                       "AL+{知覚B}+0　知覚判定\n" + \
+                                       "AL+{理知B}+0　理知判定\n" + \
+                                       "AL+{意志B}+0　意志判定\n" + \
+                                       "AL+{幸運B}+0　幸運判定"
 
-        if "<chatpalette_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<chatpalette_linkage_start>\n")[1]
-            before_end = after_start.split("\n<chatpalette_linkage_end>")[0]
-            if "<no_default_chatpalette_linkage>" in self.base_memo:
+        if "<chatpalette_linkage_start_core>\n" in self.base_memo:
+            after_start = self.base_memo.split("<chatpalette_linkage_start_core>\n")[1]
+            before_end = after_start.split("\n<chatpalette_linkage_end_core>")[0]
+            if "<no_default_chatpalette_linkage_core>" in self.base_memo:
                 command = before_end
             else:
                 command = command + "\n\n" + before_end
 
         i = status_i
-        if "<status_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<status_linkage_start>\n")[1]
-            before_end = after_start.split("\n<status_linkage_end>")[0]
-            splitted_list = before_end.split("\n<status_linkage_splitter>\n")
+        if "<status_linkage_start_core>\n" in self.base_memo:
+            after_start = self.base_memo.split("<status_linkage_start_core>\n")[1]
+            before_end = after_start.split("\n<status_linkage_end_core>")[0]
+            splitted_list = before_end.split("\n<status_linkage_splitter_core>\n")
             for splitted in splitted_list:
                 label, value, max = splitted.split(",")
                 jsontext["data"]["status"].append({})
@@ -930,10 +740,10 @@ class CharacterData():
                 jsontext["data"]["status"][i]["max"] = int(max)
                 i = i + 1
 
-        if "<params_linkage_start>\n" in self.base_memo:
-            after_start = self.base_memo.split("<params_linkage_start>\n")[1]
-            before_end = after_start.split("\n<params_linkage_end>")[0]
-            splitted_list = before_end.split("\n<params_linkage_splitter>\n")
+        if "<params_linkage_start_core>\n" in self.base_memo:
+            after_start = self.base_memo.split("<params_linkage_start_core>\n")[1]
+            before_end = after_start.split("\n<params_linkage_end_core>")[0]
+            splitted_list = before_end.split("\n<params_linkage_splitter_core>\n")
             for splitted in splitted_list:
                 label, value = splitted.split(",")
                 jsontext["data"]["params"].append({})
@@ -951,17 +761,6 @@ class CharacterData():
 
 
 def get_data(value):
-    print("URL=" + value)
-    url = value
-    driver = webdriver.Chrome()
-    driver.get(url)
-    character = CharacterData()
-    time.sleep(5)
-
-    character.input_data(driver, url)
-    character.output_text()
-
-    driver.quit()
 
     print("URL=" + value)
     url = value
@@ -975,14 +774,14 @@ def get_data(value):
 
     driver.quit()
 
-    tkinter.messagebox.showinfo(title="完了", message="駒データを生成しました")
+    tkinter.messagebox.showinfo(title="完了", message="コア駒データを生成しました")
 
     sys.exit()
 
 
 if __name__ == "__main__":
     root = tkinter.Tk()
-    root.title(u"メタリックガーディアンRPG ココフォリア用駒データ作成ツール")
+    root.title(u"メタリックガーディアンRPG ココフォリア用コア駒データ作成ツール")
     root.geometry("400x150")
 
     frame1 = tkinter.Frame(root, width=400, height=50)  # Label

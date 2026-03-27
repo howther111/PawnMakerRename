@@ -485,11 +485,11 @@ class GuardianData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][1]["label"] = "反射基本値"
-        jsontext["data"]["params"][1]["value"] = self.sense_total
+        jsontext["data"]["params"][1]["value"] = self.reflex_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][2]["label"] = "知覚基本値"
-        jsontext["data"]["params"][2]["value"] = self.strong_total
+        jsontext["data"]["params"][2]["value"] = self.sense_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][3]["label"] = "理知基本値"
@@ -509,11 +509,11 @@ class GuardianData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][7]["label"] = "反射B"
-        jsontext["data"]["params"][7]["value"] = self.sense_bonus
+        jsontext["data"]["params"][7]["value"] = self.reflex_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][8]["label"] = "知覚B"
-        jsontext["data"]["params"][8]["value"] = self.strong_bonus
+        jsontext["data"]["params"][8]["value"] = self.sense_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][9]["label"] = "理知B"
@@ -854,11 +854,11 @@ class CharacterData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][1]["label"] = "反射基本値"
-        jsontext["data"]["params"][1]["value"] = self.sense_total
+        jsontext["data"]["params"][1]["value"] = self.reflex_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][2]["label"] = "知覚基本値"
-        jsontext["data"]["params"][2]["value"] = self.strong_total
+        jsontext["data"]["params"][2]["value"] = self.sense_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][3]["label"] = "理知基本値"
@@ -902,12 +902,12 @@ class CharacterData():
         jsontext["data"]["invisible"] = "false"
         jsontext["data"]["hideStatus"] = "false"
         jsontext["data"]["externalUrl"] = self.url
-        command = "//能力値判定\nAL+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
-                  "AL+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
-                  "AL+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
-                  "AL+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
-                  "AL+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
-                  "AL+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
+        command = "//能力値判定\n2d6+{体力B}+0[{クリティカル値},{ファンブル値}]　体力判定\n" + \
+                  "2d6+{反射B}+0[{クリティカル値},{ファンブル値}]　反射判定\n" + \
+                  "2d6+{知覚B}+0[{クリティカル値},{ファンブル値}]　知覚判定\n" + \
+                  "2d6+{理知B}+0[{クリティカル値},{ファンブル値}]　理知判定\n" + \
+                  "2d6+{意志B}+0[{クリティカル値},{ファンブル値}]　意志判定\n" + \
+                  "2d6+{幸運B}+0[{クリティカル値},{ファンブル値}]　幸運判定"
 
         if "<chatpalette_linkage_start>\n" in self.base_memo:
             after_start = self.base_memo.split("<chatpalette_linkage_start>\n")[1]

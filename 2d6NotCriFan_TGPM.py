@@ -491,11 +491,11 @@ class GuardianData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][1]["label"] = "反射基本値"
-        jsontext["data"]["params"][1]["value"] = self.sense_total
+        jsontext["data"]["params"][1]["value"] = self.reflex_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][2]["label"] = "知覚基本値"
-        jsontext["data"]["params"][2]["value"] = self.strong_total
+        jsontext["data"]["params"][2]["value"] = self.sense_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][3]["label"] = "理知基本値"
@@ -515,11 +515,11 @@ class GuardianData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][7]["label"] = "反射B"
-        jsontext["data"]["params"][7]["value"] = self.sense_bonus
+        jsontext["data"]["params"][7]["value"] = self.reflex_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][8]["label"] = "知覚B"
-        jsontext["data"]["params"][8]["value"] = self.strong_bonus
+        jsontext["data"]["params"][8]["value"] = self.sense_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][9]["label"] = "理知B"
@@ -864,11 +864,11 @@ class CharacterData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][1]["label"] = "反射基本値"
-        jsontext["data"]["params"][1]["value"] = self.sense_total
+        jsontext["data"]["params"][1]["value"] = self.reflex_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][2]["label"] = "知覚基本値"
-        jsontext["data"]["params"][2]["value"] = self.strong_total
+        jsontext["data"]["params"][2]["value"] = self.sense_total
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][3]["label"] = "理知基本値"
@@ -888,11 +888,11 @@ class CharacterData():
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][7]["label"] = "反射B"
-        jsontext["data"]["params"][7]["value"] = self.sense_bonus
+        jsontext["data"]["params"][7]["value"] = self.reflex_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][8]["label"] = "知覚B"
-        jsontext["data"]["params"][8]["value"] = self.strong_bonus
+        jsontext["data"]["params"][8]["value"] = self.sense_bonus
 
         jsontext["data"]["params"].append({})
         jsontext["data"]["params"][9]["label"] = "理知B"
