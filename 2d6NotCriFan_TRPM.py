@@ -300,12 +300,12 @@ class HeroData():
             text = text + special + "/"
         text = text[:-1]
 
-        text = text + "\n[*]武器１:" + self.outfits_rightname + \
+        text = text + "\n[*]武器右:" + self.outfits_rightname + \
                 " 射程:" + self.outfits_rightrange + \
                 " 代償:" + self.outfits_rightstrong + \
                 "\n攻撃力:" + self.outfits_rightattack
 
-        text = text + "\n[*]武器２:" + self.outfits_leftname + \
+        text = text + "\n[*]武器左:" + self.outfits_leftname + \
                 " 射程:" + self.outfits_leftrange + \
                 " 代償:" + self.outfits_leftstrong + \
                 "\n攻撃力:" + self.outfits_leftattack
