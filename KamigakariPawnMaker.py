@@ -72,7 +72,7 @@ class KamigakariData():
 
     def output_text(self):
         # 駒のテキストデータを出力する
-        text = "キャラクター名:" + self.character_name
+        text = ""
 
         print(text)
 
