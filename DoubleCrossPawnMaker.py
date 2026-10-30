@@ -418,25 +418,6 @@ class OveredData():
                                        "({社会}+{侵蝕ダイス修正}+0)DX+{社会}+0  社会判定\n" \
                                        "({XX}+{YY}+{侵蝕ダイス修正}+0)DX+{XX}+{YY}+0  YY判定\n"
 
-        """
-        command = command + "\n//特技"
-        for i in range(len(self.arts)):
-            if not self.arts[i].name == "":
-                command = command + "\n特技名:" + self.skill_name[i].replace("\n", "") + "/クラス:" + self.skill_class[i] + \
-                          "/レベル:" + self.skill_level[i] + "/種別:" + self.skill_type[i] + "/タイミング:" + \
-                          self.skill_timing[i] + "/対象:" + self.skill_target[i] + "/射程:" + self.skill_range[i] + \
-                          "/代償:" +  self.skill_cost[i] + "/備考:" + self.skill_memo[i].replace("\n", "")
-
-        command = command + "\n//加護"
-        for i in range(len(self.specials)):
-            if not self.specials[i] == "":
-                command = command + "\n加護名:" + self.specials[i].replace("\n", "") + "/効果:" + self.specials_effect[i].replace("\n", "")
-
-        command = command + "\n//アイテム"
-        for i in range(len(self.items)):
-            if not self.items[i] == "":
-                command = command + "\nアイテム名:" + self.items[i].replace("\n", "") + "/効果:" + self.items_effect[i].replace("\n", "")
-        """
 
         if "<chatpalette_start>\n" in self.base_memo:
             after_start = self.base_memo.split("<chatpalette_start>\n")[1]
